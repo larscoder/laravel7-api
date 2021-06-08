@@ -24,10 +24,9 @@ class CategoryControllerTest extends TestCase
 
     public function test_index()
     {
-        factory(Category::class, 5)->create();
+        factory(Category::class, 4)->create();
 
         $response = $this->getJson('/api/categories');
-
         $response->assertSuccessful();
         $response->assertHeader('content-type', 'application/json');
         $response->assertJsonCount(5);
