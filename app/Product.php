@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Utils\CanBeRate;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    use CanBeRate;
+
     protected $guarded = [];
 
     public function category()
@@ -15,6 +18,6 @@ class Product extends Model
 
     public function createdBy()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 }
