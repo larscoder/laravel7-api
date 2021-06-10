@@ -50,11 +50,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        // if ($exception instanceof InvalidScore) {
-        //     // return response()->json([
-        //     //     'score' => 'Debes ingresar un valor que este dentro de 1 o 5'
-        //     // ]);
-        // }
+        if ($exception instanceof InvalidScore) {
+            return response()->json([
+                'score' => $exception->getMessage()
+            ], 422);
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'error' => $exception->getMessage()
+            ]);
+        }
 
         return parent::render($request, $exception);
     }

@@ -23,3 +23,7 @@ Auth::routes(['verify' => true]);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('server-error', function() {
+    abort(500, 'Error de esto y aquello');
+});
